@@ -27,7 +27,7 @@ const LeftDrawer = (props) => {
     avatar: {
       div: {
         padding: '15px 0 20px 15px',
-        backgroundImage: 'url("../images/material_bg.png")',
+        backgroundImage:  'url(' + require('../images/material_bg.png') + ')',
         height: 45
       },
       icon: {
