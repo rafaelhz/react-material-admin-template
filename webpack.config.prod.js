@@ -17,7 +17,7 @@ export default {
   target: 'web',
   output: {
     path: `${__dirname}/dist`,
-    publicPath: '/',
+    publicPath: './',
     filename: '[name].[chunkhash].js'
   },
   plugins: [
