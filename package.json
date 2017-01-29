@@ -70,7 +70,7 @@
     "open": "0.0.5",
     "postcss-loader": "0.9.1",
     "prompt": "1.0.0",
-    "react-addons-test-utils": "15.3.0",
+    "react-addons-test-utils": "15.4.2",
     "redux-immutable-state-invariant": "1.2.3",
     "replace": "0.3.0",
     "rimraf": "2.5.4",
