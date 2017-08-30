@@ -1,3 +1,34 @@
+React Ui-Material Admin Template
+================================
+
+This is a simple responsive admin template using [React](https://facebook.github.io/react/) and [Material-UI](http://www.material-ui.com/) components.
+
+- React Router v4+
+- Facebook Login
+- Github AJAX Demo via Axios
+- Higher-Order Components (HOC)
+
+Demo
+----
+
+You can find a demo [here](http://rafaelhz.github.io/react-material-admin-template).
+
+
+Installation / Running
+----------------------
+
+1. `git clone <repository-url>` this repository
+2. change into the new directory
+3. `npm install`
+4. `npm start` will run the app
+5. Visit the app at [http://localhost:3000](http://localhost:3000)
+
+
+License
+-------
+MIT
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
@@ -1755,7 +1786,7 @@ If you’re using [Apache HTTP Server](https://httpd.apache.org/), you need to c
     RewriteRule ^ index.html [QSA,L]
 ```
 
-It will get copied to the `build` folder when you run `npm run build`. 
+It will get copied to the `build` folder when you run `npm run build`.
 
 If you’re using [Apache Tomcat](http://tomcat.apache.org/), you need to follow [this Stack Overflow answer](https://stackoverflow.com/a/41249464/4878474).
 
