@@ -6,6 +6,7 @@ import {white, blue600} from 'material-ui/styles/colors';
 import MenuItem from 'material-ui/MenuItem';
 import {Link} from 'react-router-dom';
 import Avatar from 'material-ui/Avatar';
+import Person from 'material-ui/svg-icons/social/person';
 
 const LeftDrawer = (props) => {
   let { navDrawerOpen } = props;
@@ -52,12 +53,17 @@ const LeftDrawer = (props) => {
       docked={true}
       open={navDrawerOpen}>
         <div style={styles.logo}>
-          Friend Trait
+          Material Admin
         </div>
         <div style={styles.avatar.div}>
-          <Avatar src={props.user ? props.user.picture : ''}
+          {props.user ?
+            <Avatar src={props.user.picture}
                   size={50}
                   style={styles.avatar.icon}/>
+            : <Avatar icon={<Person />}
+                  size={50}
+                  style={styles.avatar.icon}/>
+          }
           <span style={styles.avatar.span}>{props.user ? props.user.name : 'Guest'}</span>
         </div>
         <div>

@@ -8,10 +8,10 @@ import {grey500, white} from 'material-ui/styles/colors';
 import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import Help from 'material-ui/svg-icons/action/help';
 import TextField from 'material-ui/TextField';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import ThemeDefault from '../theme-default';
 
-const LoginPage = () => {
+const LoginPage = (props) => {
 
   const styles = {
     loginContainer: {
@@ -72,6 +72,11 @@ const LoginPage = () => {
     },
   };
 
+  // only show when logged out
+  if (props.user) {
+    return (<Redirect to="/" />)
+  }
+
   return (
     <MuiThemeProvider muiTheme={ThemeDefault}>
       <div>
@@ -126,10 +131,10 @@ const LoginPage = () => {
           </div>
 
           <div style={styles.buttonsDiv}>
-            <Link to="/" style={{...styles.btn, ...styles.btnFacebook}}>
+            <a to="#" onClick={props.onLogin} style={{...styles.btn, ...styles.btnFacebook}}>
               <i className="fa fa-facebook fa-lg"/>
               <span style={styles.btnSpan}>Log in with Facebook</span>
-            </Link>
+            </a>
             <Link to="/" style={{...styles.btn, ...styles.btnGoogle}}>
               <i className="fa fa-google-plus fa-lg"/>
               <span style={styles.btnSpan}>Log in with Google</span>

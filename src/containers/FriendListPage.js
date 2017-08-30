@@ -23,7 +23,7 @@ class FriendListPage extends React.Component {
             <div key={friend.login}>
               <ListItem
                 leftAvatar={<Avatar src={friend.avatar_url} />}
-                containerElement={<Link to={"/rate/" + friend.login} />}
+                containerElement={<Link to={"/view/" + friend.login} />}
                 primaryText={friend.login}
                 secondaryText={
                   <p>

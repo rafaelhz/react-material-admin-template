@@ -33,6 +33,8 @@ class Header extends React.Component {
       }
     };
 
+    // console.log("Header Props", this.props);
+
     return (
         <div>
             <AppBar

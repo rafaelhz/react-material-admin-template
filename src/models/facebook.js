@@ -1,14 +1,15 @@
 /*global FB*/
 
 const promises = {
+    AppID: null,
     init: () => {
         return new Promise((resolve, reject) => {
             if (typeof FB !== 'undefined') {
                 resolve();
             } else {
-                window.fbAsyncInit = () => {
+                window.fbAsyncInit = (a) => {
                     FB.init({
-                        appId      : '',
+                        appId      : promises.AppID,
                         cookie     : true,
                         xfbml      : false,
                         status     : true, // Lookup user status on load
@@ -30,6 +31,7 @@ const promises = {
     checkLoginState: () => {
         return new Promise((resolve, reject) => {
             FB.getLoginStatus((response) => {
+                // console.log('FB.getLoginStatus', response.status);
                 response.status === 'connected' ? resolve(response) : reject(response);
             });
         });
@@ -37,8 +39,9 @@ const promises = {
     login: () => {
         return new Promise((resolve, reject) => {
             FB.login((response) => {
+                // console.log('FB.login', response.status);
                 response.status === 'connected' ? resolve(response) : reject(response);
-            }, {scope: 'public_profile,user_friends,user_posts'});
+            }, {scope: 'public_profile,user_friends,email'});
         });
     },
     logout: () => {
@@ -48,11 +51,11 @@ const promises = {
             });
         });
     },
-    fetch: () => {
+    me: () => {
         return new Promise((resolve, reject) => {
             FB.api(
                 '/me',
-                {fields: 'first_name, last_name, short_name, picture{url}, age_range, gender'},
+                {fields: 'first_name, last_name, picture{url}, age_range, gender'},
                 response => response.error ? reject(response) : resolve(response)
             );
         });
@@ -60,6 +63,9 @@ const promises = {
 }
 
 var Facebook = {
+    SetAppID(AppID) {
+      promises.AppID = AppID;
+    },
     IsLoggedIn() {
       var p = new Promise((resolve, reject) => {
         promises.init()
@@ -69,7 +75,7 @@ var Facebook = {
                 )
                 .then(
                     response => {
-                      console.log('Facebook.AutoLogin()', response.authResponse);
+                      // console.log('Facebook.AutoLogin()', response.authResponse);
                       resolve(response.authResponse);
                     },
                     error => { throw error; } // Logged out, not really an error
@@ -94,7 +100,7 @@ var Facebook = {
                       resolve(response.authResponse);
                     },
                     err => {
-                      promises.login
+                      promises.login()
                       .then(
                           response => {
                             console.log('Facebook.Login(2)', response.authResponse);
@@ -115,13 +121,12 @@ var Facebook = {
         });
         return p;
     },
-    Feed() {
+    Me() {
       var p = new Promise((resolve, reject) => {
 
-        promises.fetchFeed()
+        promises.me()
           .then(
               feed => {
-                // console.log('Facebook.Feed()');
                 resolve(feed);
               },
               error => { throw error; }
@@ -157,59 +162,6 @@ var Facebook = {
         });
         return p;
     },
-
-    /*,
-    doLogout() {
-        this.setState({
-            loading: true
-        }, () => {
-            promises.init()
-                .then(
-                    promises.checkLoginState,
-                    error => { throw error; }
-                )
-                .then(
-                    promises.logout,
-                    error => { this.setState({data: {}, status: 'unknown'}); }
-                )
-                .then(
-                    response => { this.setState({loading: false, data: {}, status: 'unknown'}); },
-                    error => { throw error; }
-                )
-                .catch(error => {
-                    this.setState({loading: false, data: {}, status: 'unknown'});
-                    console.warn(error);
-                });
-        });
-    },
-    checkStatus() {
-        this.setState({
-            loading: true
-        }, () => {
-            promises.init()
-                .then(
-                    promises.checkLoginState,
-                    error => { throw error; }
-                )
-                .then(
-                    response => { this.setState({status: response.status}); },
-                    error => { throw error; }
-                )
-                .then(
-                    promises.fetchUser,
-                    error => { throw error; }
-                )
-                .then(
-                    response => { this.setState({loading: false, data: response, status: 'connected'}); },
-                    error => { throw error; }
-                )
-                .catch((error) => {
-                    this.setState({loading: false, data: {}, status: 'unknown'});
-                    console.warn(error);
-                });
-        });
-    }
-    */
 };
 
 export default Facebook

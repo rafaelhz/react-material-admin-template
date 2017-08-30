@@ -6,7 +6,7 @@ import withWidth, {LARGE, SMALL} from 'material-ui/utils/withWidth';
 import Data from '../data';
 import Facebook from '../models/facebook';
 
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Backend from '../models/backend.js';
 
@@ -16,7 +16,7 @@ import FormPage from './FormPage';
 import TablePage from './TablePage';
 import Dashboard from './DashboardPage';
 import FriendListPage from './FriendListPage';
-import RatePage from './RatePage';
+import ViewUserPage from './ViewUserPage';
 
 
 /*
@@ -36,6 +36,9 @@ class App extends React.Component {
       user: null,
       uid: null,
     };
+
+    // Set your app ID here
+    Facebook.SetAppID('');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -55,7 +58,6 @@ class App extends React.Component {
 
     Backend.getUsers().then(
       response => {
-        console.log("Friends", response.data);
         that.setState({friends: response.data })
       },
       error => { console.log(error); }
@@ -65,11 +67,11 @@ class App extends React.Component {
     Facebook.IsLoggedIn().then(
       response => {
 
-        console.log("Facebook Response", response);
+        // console.log("Facebook Response", response);
         that.setToken(response);
 
         // console.log("loading feed")
-        Facebook.Feed().then(
+        Facebook.Me().then(
           response => {
             // console.log('Feed response', response);
             that.setUser(response)
@@ -106,23 +108,22 @@ class App extends React.Component {
     Facebook.Login().then(
       response => {
 
-        // console.log('Login response', response);
+        console.log('Login response', response);
         this.setToken(response);
-        // console.log("loading feed")
 
-        Facebook.Feed().then(
+        Facebook.Me().then(
           response => {
-            // console.log('Feed response', response);
             that.setUser(response)
           },
-          err => { console.log("feed error", err); }
+          err => { console.log("Facebook Profile Error", err); }
         )
       },
-      err => { console.log("login ERROR", err); }
+      err => { console.log("Facebook Login Error", err); }
     );
   }
 
   logout() {
+    // console.log("App.logout()")
     Facebook.Logout().then(
       response => { console.log(response); },
       err => { console.log(err); }
@@ -130,8 +131,6 @@ class App extends React.Component {
   }
 
   render() {
-
-    // console.log('App.js.render()', this.state)
 
     let { navDrawerOpen } = this.state;
     const paddingLeftDrawerOpen = 236;
@@ -142,7 +141,6 @@ class App extends React.Component {
       },
       container: {
         padding: this.props.width === SMALL ? '80px 20px 20px 15px' : '100px 40px 40px 40px',
-        // marginTop: '80px',
         marginLeft: navDrawerOpen && this.props.width !== SMALL ? paddingLeftDrawerOpen : 0
       }
     };
@@ -163,16 +161,18 @@ class App extends React.Component {
 
             <div style={styles.container}>
 
-              {/* {this.props.children} */}
-              {/* {React.cloneElement(this.props.children, { friends: this.state.friends })} */}
-
               <Switch>
-                <Route path="login" component={LoginPage}/>
+
+                <Route exact path="/login" render={(props) => (
+                  that.state.user ? (
+                    <Redirect to="/" />
+                  ) : (
+                    <LoginPage onLogin={that.login.bind(that)} user={that.state.user} />
+                  )
+                )}/>
 
                 <Route path="/friendlist" render={props => <FriendListPage {...props} friends={that.state.friends.length ? that.state.friends : []} /> } />
-
-                <Route path="/rate/:id" render={props => <RatePage {...props} {...this.state} /> } />
-
+                <Route path="/view/:id" render={props => <ViewUserPage {...props} {...this.state} /> } />
                 <Route path="/form" component={FormPage} />
                 <Route path="/table" component={TablePage} />
                 <Route path="/" {...this.state} render={props => <Dashboard {...props} /> } />
@@ -184,12 +184,6 @@ class App extends React.Component {
     );
   }
 }
-
-
-// function addState(WrappedComponent, state, props) {
-//   return <WrappedComponent {...state} {...props} />
-// }
-
 
 App.propTypes = {
   children: PropTypes.element,
