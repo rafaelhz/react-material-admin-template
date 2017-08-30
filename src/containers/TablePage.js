@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentCreate from 'material-ui/svg-icons/content/create';
@@ -43,7 +43,8 @@ const TablePage = () => {
 
   return (
     <PageBase title="Table Page"
-              navigation="Application / Table Page">
+              navigation="Application / Table Page"
+              fluid="true">
 
       <div>
         <Link to="/form" >
@@ -82,7 +83,7 @@ const TablePage = () => {
               </TableRow>
             )}
           </TableBody>
-        </Table>    
+        </Table>
       </div>
     </PageBase>
   );

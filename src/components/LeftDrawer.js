@@ -1,9 +1,10 @@
-import React,  { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Drawer from 'material-ui/Drawer';
 import {spacing, typography} from 'material-ui/styles';
 import {white, blue600} from 'material-ui/styles/colors';
 import MenuItem from 'material-ui/MenuItem';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import Avatar from 'material-ui/Avatar';
 
 const LeftDrawer = (props) => {
@@ -51,13 +52,13 @@ const LeftDrawer = (props) => {
       docked={true}
       open={navDrawerOpen}>
         <div style={styles.logo}>
-          Material Admin
+          Friend Trait
         </div>
         <div style={styles.avatar.div}>
-          <Avatar src="http://www.material-ui.com/images/uxceo-128.jpg"
+          <Avatar src={props.user ? props.user.picture : ''}
                   size={50}
                   style={styles.avatar.icon}/>
-          <span style={styles.avatar.span}>{props.username}</span>
+          <span style={styles.avatar.span}>{props.user ? props.user.name : 'Guest'}</span>
         </div>
         <div>
           {props.menus.map((menu, index) =>

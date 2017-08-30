@@ -12,69 +12,73 @@ import RecentlyProducts from '../components/dashboard/RecentlyProducts';
 import globalStyles from '../styles';
 import Data from '../data';
 
-const DashboardPage = () => {
+export default class Dashboard extends React.Component {
 
-  return (
-    <div>
-      <h3 style={globalStyles.navigation}>Application / Dashboard</h3>
+  render() {
+    return (
+      <div>
+        <h3 style={globalStyles.navigation}>Application / Dashboard</h3>
 
-      <div className="row">
+        <div className="row">
 
-        <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-          <InfoBox Icon={ShoppingCart}
-                   color={pink600}
-                   title="Total Profit"
-                   value="1500k"
-          />
+          <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
+            <InfoBox Icon={ShoppingCart}
+                     color={pink600}
+                     title="Total Profit"
+                     value="1500k"
+            />
+          </div>
+
+
+          <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
+            <InfoBox Icon={ThumbUp}
+                     color={cyan600}
+                     title="Likes"
+                     value="4231"
+            />
+          </div>
+
+          <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
+            <InfoBox Icon={Assessment}
+                     color={purple600}
+                     title="Sales"
+                     value="460"
+            />
+          </div>
+
+          <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
+            <InfoBox Icon={Face}
+                     color={orange600}
+                     title="New Members"
+                     value="248"
+            />
+          </div>
         </div>
 
+        <div className="row">
+          <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-md m-b-15">
+            <NewOrders data={Data.dashBoardPage.newOrders}/>
+          </div>
 
-        <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-          <InfoBox Icon={ThumbUp}
-                   color={cyan600}
-                   title="Likes"
-                   value="4231"
-          />
+          <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6 m-b-15">
+            <MonthlySales data={Data.dashBoardPage.monthlySales}/>
+          </div>
         </div>
 
-        <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-          <InfoBox Icon={Assessment}
-                   color={purple600}
-                   title="Sales"
-                   value="460"
-          />
-        </div>
+        <div className="row">
+          <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 m-b-15 ">
+            <RecentlyProducts data={Data.dashBoardPage.recentProducts}/>
+          </div>
 
-        <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-          <InfoBox Icon={Face}
-                   color={orange600}
-                   title="New Members"
-                   value="248"
-          />
+          <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 m-b-15 ">
+            <BrowserUsage data={Data.dashBoardPage.browserUsage}/>
+          </div>
         </div>
       </div>
-
-      <div className="row">
-        <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-md m-b-15">
-          <NewOrders data={Data.dashBoardPage.newOrders}/>
-        </div>
-
-        <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6 m-b-15">
-          <MonthlySales data={Data.dashBoardPage.monthlySales}/>
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 m-b-15 ">
-          <RecentlyProducts data={Data.dashBoardPage.recentProducts}/>
-        </div>
-
-        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 m-b-15 ">
-          <BrowserUsage data={Data.dashBoardPage.browserUsage}/>
-        </div>
-      </div>
-    </div>
-  );
+    );
+  }
 };
 
-export default DashboardPage;
+
+Dashboard.propTypes = {
+};

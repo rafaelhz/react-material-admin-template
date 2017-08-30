@@ -1,0 +1,50 @@
+html {
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+  font-size: 15px;
+  margin: 0;
+  line-height: 24px;
+}
+
+body {
+  margin: 0;
+  /*background-color: #efefef;*/
+}
+
+body, html, #app, #app > div{
+  height: 100%;
+}
+
+a {
+  color: #ff4081;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/*.m-b-15 {
+  margin-bottom: 15px
+}*/
+
+/*.rateSlider div div div div:nth-child(-n+2)*/
+
+/* Both sides of the slider */
+.rateSlider div div div {
+  border-radius: 2px;
+}
+
+/* The slider handle */
+.rateSlider div div div div:nth-child(3) {
+  background-color: #283593 !important;
+}
+
+.rateSlider div div div div:nth-child(3):hover,
+.rateSlider div div div div:nth-child(3):active
+{
+  background-color: #ed20f7 !important;
+}
