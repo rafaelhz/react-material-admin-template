@@ -1,24 +1,24 @@
-import React,  { PropTypes } from 'react';
-import Drawer from 'material-ui/Drawer';
-import {spacing, typography} from 'material-ui/styles';
-import {white, blue600} from 'material-ui/styles/colors';
-import MenuItem from 'material-ui/MenuItem';
-import {Link} from 'react-router';
-import Avatar from 'material-ui/Avatar';
+import React, { PropTypes } from "react";
+import Drawer from "material-ui/Drawer";
+import { spacing, typography } from "material-ui/styles";
+import { white, blue600 } from "material-ui/styles/colors";
+import MenuItem from "material-ui/MenuItem";
+import { Link } from "react-router";
+import Avatar from "material-ui/Avatar";
 
-const LeftDrawer = (props) => {
+const LeftDrawer = props => {
   let { navDrawerOpen } = props;
 
   const styles = {
     logo: {
-      cursor: 'pointer',
+      cursor: "pointer",
       fontSize: 22,
       color: typography.textFullWhite,
       lineHeight: `${spacing.desktopKeylineIncrement}px`,
       fontWeight: typography.fontWeightLight,
       backgroundColor: blue600,
       paddingLeft: 40,
-      height: 56,
+      height: 56
     },
     menuItem: {
       color: white,
@@ -26,50 +26,48 @@ const LeftDrawer = (props) => {
     },
     avatar: {
       div: {
-        padding: '15px 0 20px 15px',
-        backgroundImage:  'url(' + require('../images/material_bg.png') + ')',
+        padding: "15px 0 20px 15px",
+        backgroundImage: "url(" + require("../images/material_bg.png") + ")",
         height: 45
       },
       icon: {
-        float: 'left',
-        display: 'block',
+        float: "left",
+        display: "block",
         marginRight: 15,
-        boxShadow: '0px 0px 0px 8px rgba(0,0,0,0.2)'
+        boxShadow: "0px 0px 0px 8px rgba(0,0,0,0.2)"
       },
       span: {
         paddingTop: 12,
-        display: 'block',
-        color: 'white',
+        display: "block",
+        color: "white",
         fontWeight: 300,
-        textShadow: '1px 1px #444'
+        textShadow: "1px 1px #444"
       }
     }
   };
 
   return (
-    <Drawer
-      docked={true}
-      open={navDrawerOpen}>
-        <div style={styles.logo}>
-          Material Admin
-        </div>
-        <div style={styles.avatar.div}>
-          <Avatar src="http://www.material-ui.com/images/uxceo-128.jpg"
-                  size={50}
-                  style={styles.avatar.icon}/>
-          <span style={styles.avatar.span}>{props.username}</span>
-        </div>
-        <div>
-          {props.menus.map((menu, index) =>
-            <MenuItem
-              key={index}
-              style={styles.menuItem}
-              primaryText={menu.text}
-              leftIcon={menu.icon}
-              containerElement={<Link to={menu.link}/>}
-            />
-          )}
-        </div>
+    <Drawer docked={true} open={navDrawerOpen}>
+      <div style={styles.logo}>CareNow Admin</div>
+      <div style={styles.avatar.div}>
+        <Avatar
+          src="https://files.slack.com/files-pri/T039C2PUY-F8J7W49C3/untitled_drawing.jpg"
+          size={50}
+          style={styles.avatar.icon}
+        />
+        <span style={styles.avatar.span}>{props.username}</span>
+      </div>
+      <div>
+        {props.menus.map((menu, index) => (
+          <MenuItem
+            key={index}
+            style={styles.menuItem}
+            primaryText={menu.text}
+            leftIcon={menu.icon}
+            containerElement={<Link to={menu.link} />}
+          />
+        ))}
+      </div>
     </Drawer>
   );
 };
@@ -77,7 +75,7 @@ const LeftDrawer = (props) => {
 LeftDrawer.propTypes = {
   navDrawerOpen: PropTypes.bool,
   menus: PropTypes.array,
-  username: PropTypes.string,
+  username: PropTypes.string
 };
 
 export default LeftDrawer;
