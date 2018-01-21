@@ -55,7 +55,7 @@ const TablePage = () => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHeaderColumn style={styles.columns.id}>ID</TableHeaderColumn>
+              <TableHeaderColumn style={styles.columns.id}>No</TableHeaderColumn>
               <TableHeaderColumn style={styles.columns.name}>Name</TableHeaderColumn>
               <TableHeaderColumn style={styles.columns.price}>Price</TableHeaderColumn>
               <TableHeaderColumn style={styles.columns.category}>Category</TableHeaderColumn>
@@ -65,7 +65,7 @@ const TablePage = () => {
           <TableBody>
             {Data.tablePage.items.map(item =>
               <TableRow key={item.id}>
-                <TableRowColumn style={styles.columns.id}>{item.id}</TableRowColumn>
+                <TableRowColumn style={styles.columns.id}>{item.no}</TableRowColumn>
                 <TableRowColumn style={styles.columns.name}>{item.name}</TableRowColumn>
                 <TableRowColumn style={styles.columns.price}>{item.price}</TableRowColumn>
                 <TableRowColumn style={styles.columns.category}>{item.category}</TableRowColumn>
