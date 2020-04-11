@@ -1,3 +1,6 @@
+This Template is outdated, I recommend to use material-ui templates, there are free options available:
+https://material-ui.com/store/
+
 React Ui-Material Admin Template
 ================================
 
