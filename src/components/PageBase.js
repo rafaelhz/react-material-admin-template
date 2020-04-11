@@ -1,5 +1,5 @@
-import React, {PropTypes} from 'react';
-import Paper from 'material-ui/Paper';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Divider from 'material-ui/Divider';
 import globalStyles from '../styles';
 
@@ -8,24 +8,27 @@ const PageBase = (props) => {
     const {title, navigation} = props;
 
     return (
-      <div>
-        <span style={globalStyles.navigation}>{navigation}</span>
+      <div className="row">
+        <div className={props.fluid === "true" ? "" : "col-xs-12 col-sm-12 col-md-9 col-lg-6"}>
+          <div className="box-row">
 
-        <Paper style={globalStyles.paper}>
-          <h3 style={globalStyles.title}>{title}</h3>
+            <span style={globalStyles.navigation}>{navigation}</span>
 
-          <Divider/>
-          {props.children}
+            <h3 style={globalStyles.title}>{title}</h3>
 
-          <div style={globalStyles.clear}/>
+            <Divider/>
+            {props.children}
 
-        </Paper>
+            <div style={globalStyles.clear}/>
+
+        </div>
       </div>
+    </div>
     );
 };
 
 PageBase.propTypes = {
-  title: PropTypes.string,
+  // title: PropTypes.object,
   navigation: PropTypes.string,
   children: PropTypes.element
 };

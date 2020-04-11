@@ -1,9 +1,9 @@
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {blue600, grey900} from 'material-ui/styles/colors';
+import {blue600, grey900, lightGreenA700} from 'material-ui/styles/colors';
 
 const themeDefault = getMuiTheme({
-  palette: {
-  },
+  // palette: {
+  // },
   appBar: {
     height: 57,
     color: blue600
@@ -14,7 +14,21 @@ const themeDefault = getMuiTheme({
   },
   raisedButton: {
     primaryColor: blue600,
-  }
+  },
+  slider: {
+    trackSize: 5,
+    trackColor: lightGreenA700,
+    trackColorSelected: lightGreenA700,
+    // handleColorZero: "#bdbdbd",
+    // handleFillColor: "#ffffff",
+    handleSize: 18,
+    handleSizeActive: 24,
+    handleSizeDisabled: 8,
+    // rippleColor: "#00bcd4",
+    // rippleColor: "#ed20f7"
+    // selectionColor: "#00bcd4"
+    // selectionColor: "#ed20f7"
+  },
 });
 
 

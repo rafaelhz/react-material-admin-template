@@ -1,5 +1,6 @@
-import React, {PropTypes} from 'react';
-import {Link} from 'react-router';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
@@ -9,6 +10,8 @@ import Menu from 'material-ui/svg-icons/navigation/menu';
 import ViewModule from 'material-ui/svg-icons/action/view-module';
 import {white} from 'material-ui/styles/colors';
 import SearchBox from './SearchBox';
+
+// import Facebook from '../models/facebook';
 
 class Header extends React.Component {
 
@@ -29,6 +32,8 @@ class Header extends React.Component {
         marginLeft: 20
       }
     };
+
+    // console.log("Header Props", this.props);
 
     return (
         <div>
@@ -51,9 +56,12 @@ class Header extends React.Component {
                             targetOrigin={{horizontal: 'right', vertical: 'top'}}
                             anchorOrigin={{horizontal: 'right', vertical: 'top'}}
                   >
-                    <MenuItem key={1} primaryText="Application 1"/>
-                    <MenuItem key={2} primaryText="Application 2"/>
-                    <MenuItem key={3} primaryText="Application 3"/>
+
+
+                    { this.props.user ? null : <MenuItem key={1} primaryText="Login with Facebook" onClick={this.props.onLogin}/> }
+
+                    { this.props.user ? <MenuItem key={2} primaryText="Logout" onClick={this.props.onLogout}/> : null }
+
                   </IconMenu>
                   <IconMenu color={white}
                             iconButtonElement={
